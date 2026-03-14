@@ -1,0 +1,145 @@
+{
+  "info": {
+    "name": "Guilda de Aventureiros - TP1",
+    "description": "Coleção completa para testar a API do Registro Oficial da Guilda de Aventureiros.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "1. Registrar Aventureiro",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "http://localhost:8080/aventureiros", "host": ["localhost"], "port": "8080", "path": ["aventureiros"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Gandalf\",\n  \"classe\": \"MAGO\",\n  \"nivel\": 20\n}"
+        }
+      }
+    },
+    {
+      "name": "1b. Registrar Aventureiro (INVÁLIDO - para testar erro)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "http://localhost:8080/aventureiros", "host": ["localhost"], "port": "8080", "path": ["aventureiros"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"\",\n  \"classe\": \"BRUXO\",\n  \"nivel\": -1\n}"
+        }
+      }
+    },
+    {
+      "name": "2. Listar Aventureiros (Página 0)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/aventureiros?page=0&size=10",
+          "host": ["localhost"], "port": "8080", "path": ["aventureiros"],
+          "query": [
+            { "key": "page", "value": "0" },
+            { "key": "size", "value": "10" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "2b. Listar Aventureiros (Filtro: apenas Magos ativos)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/aventureiros?classe=MAGO&ativo=true&page=0&size=10",
+          "host": ["localhost"], "port": "8080", "path": ["aventureiros"],
+          "query": [
+            { "key": "classe", "value": "MAGO" },
+            { "key": "ativo", "value": "true" },
+            { "key": "page", "value": "0" },
+            { "key": "size", "value": "10" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "2c. Listar Aventureiros (Filtro: nível mínimo 15)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8080/aventureiros?nivel=15",
+          "host": ["localhost"], "port": "8080", "path": ["aventureiros"],
+          "query": [{ "key": "nivel", "value": "15" }]
+        }
+      }
+    },
+    {
+      "name": "3. Consultar Aventureiro por ID (com companheiro)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "http://localhost:8080/aventureiros/80", "host": ["localhost"], "port": "8080", "path": ["aventureiros", "80"] }
+      }
+    },
+    {
+      "name": "3b. Consultar ID inexistente (deve retornar 404)",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "http://localhost:8080/aventureiros/9999", "host": ["localhost"], "port": "8080", "path": ["aventureiros", "9999"] }
+      }
+    },
+    {
+      "name": "4. Atualizar Aventureiro",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "http://localhost:8080/aventureiros/1", "host": ["localhost"], "port": "8080", "path": ["aventureiros", "1"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Aragorn Atualizado\",\n  \"classe\": \"GUERREIRO\",\n  \"nivel\": 15\n}"
+        }
+      }
+    },
+    {
+      "name": "5. Encerrar Vínculo (inativar aventureiro)",
+      "request": {
+        "method": "DELETE",
+        "url": { "raw": "http://localhost:8080/aventureiros/1", "host": ["localhost"], "port": "8080", "path": ["aventureiros", "1"] }
+      }
+    },
+    {
+      "name": "6. Recrutar Novamente (reativar aventureiro)",
+      "request": {
+        "method": "PATCH",
+        "url": { "raw": "http://localhost:8080/aventureiros/1/recrutar", "host": ["localhost"], "port": "8080", "path": ["aventureiros", "1", "recrutar"] }
+      }
+    },
+    {
+      "name": "7. Definir Companheiro",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "http://localhost:8080/aventureiros/1/companheiro", "host": ["localhost"], "port": "8080", "path": ["aventureiros", "1", "companheiro"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Sombra\",\n  \"especie\": \"LOBO\",\n  \"lealdade\": 95\n}"
+        }
+      }
+    },
+    {
+      "name": "7b. Definir Companheiro (INVÁLIDO - lealdade 150)",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "url": { "raw": "http://localhost:8080/aventureiros/1/companheiro", "host": ["localhost"], "port": "8080", "path": ["aventureiros", "1", "companheiro"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Sombra\",\n  \"especie\": \"LOBO\",\n  \"lealdade\": 150\n}"
+        }
+      }
+    },
+    {
+      "name": "8. Remover Companheiro",
+      "request": {
+        "method": "DELETE",
+        "url": { "raw": "http://localhost:8080/aventureiros/1/companheiro", "host": ["localhost"], "port": "8080", "path": ["aventureiros", "1", "companheiro"] }
+      }
+    }
+  ]
+}
