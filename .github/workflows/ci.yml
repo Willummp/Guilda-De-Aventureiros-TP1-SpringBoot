@@ -1,0 +1,37 @@
+name: CI - Build e Testes
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+    paths-ignore:
+      # Ignora o pipeline em commits que alteram apenas documentação
+      - '**.md'
+      - 'docs/**'
+      - '.github/docs/**'
+  pull_request:
+    branches: [ "main" ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+
+jobs:
+  build:
+    name: Build e Testes com Maven
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Compilar o projeto
+        run: mvn clean compile --no-transfer-progress
+
+      - name: Executar testes
+        run: mvn test --no-transfer-progress

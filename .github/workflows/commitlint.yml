@@ -1,0 +1,34 @@
+name: Validação de Mensagens de Commit (Conventional Commits)
+
+on:
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  commitlint:
+    name: Verificar formato dos commits
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+        with:
+          # Necessário para que o commitlint possa verificar todo o histórico do PR
+          fetch-depth: 0
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar commitlint
+        run: |
+          npm install --save-dev @commitlint/config-conventional @commitlint/cli
+
+      - name: Criar configuração do commitlint
+        run: |
+          echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > commitlint.config.js
+
+      - name: Validar commits do Pull Request
+        run: |
+          npx commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }} --verbose
