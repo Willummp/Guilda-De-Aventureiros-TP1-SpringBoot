@@ -1,10 +1,11 @@
-# 🛡️ Guilda de Aventureiros — Registro Oficial (TP1)
+# Guilda de Aventureiros — TP1
 
-API REST construída com **Spring Boot (Java 25)** para gerenciar o cadastro oficial de Aventureiros e Companheiros da Guilda. Trabalho Prático 1 da disciplina de Sistemas Escaláveis.
+API REST construída com **Spring Boot (Java 25)** para gerenciar o cadastro oficial de Aventureiros e Companheiros da Guilda. Trabalho Prático 1 da disciplina de Desenvolvimento de Serviços com Spring Boot do Instituto Infnet.
+<p align="center">
+  <img src="https://faculdadeinfnet.com.br/wp-content/uploads/sites/10/2023/08/Artboard-2.png" alt="Logo do Instituto Infnet" width="600"/>
+</p>
 
----
-
-## 📋 Requisitos do Trabalho e Como Foram Cumpridos
+## Requisitos do Trabalho e Como Foram Cumpridos
 
 ### Domínio
 
@@ -83,7 +84,7 @@ Implementado em `ErroPadraoResponse` e gerenciado pelo `GlobalExceptionHandler` 
 
 ---
 
-## 🚀 Como Executar
+## Como Executar
 
 ### Pré-requisitos
 - **Java 17+** (testado com Java 25)
@@ -99,7 +100,7 @@ A API sobe em: `http://localhost:8080`
 
 ---
 
-## 🗂️ Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 src/main/java/br/com/guilda/aventureiros/
@@ -126,14 +127,8 @@ src/main/java/br/com/guilda/aventureiros/
 
 ---
 
-## 📬 Testando com Postman
+## Testando com Postman
 
 Importe o arquivo `GuildaAventureiros.postman_collection.json` (na raiz do projeto) no Postman para ter todos os 8 endpoints já configurados com exemplos de requisições válidas e inválidas.
 
 ---
-
-## 📌 Observações sobre Escalabilidade (TP2/TP3)
-
-Este projeto (TP1) usa **persistência em memória** propositalmente. Nas próximas versões:
-- **TP2**: A `ArrayList` será substituída pelo **Elasticsearch** como motor de busca e persistência.
-- **TP3**: O ambiente será orquestrado com **Docker Compose**, facilitando a execução padronizada da API + Elasticsearch com um único comando.
